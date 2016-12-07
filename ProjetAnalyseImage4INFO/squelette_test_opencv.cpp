@@ -20,27 +20,36 @@ using namespace cv;
 using namespace std;
 
 
-vector<Mat> HSVDecomposition(const Mat& img)
+vector<Mat> split(Mat & img){
+	vector<Mat> res;
+
+	split(img, res);
+	return res;
+}
+	
+	
+Mat toHSV(const Mat& img)
 {
-	Mat img_hsv, img_threshold;
+	Mat img_hsv;
 	cvtColor(img, img_hsv, CV_BGR2HSV);
-	//namedWindow("win1", CV_WINDOW_AUTOSIZE);
-	vector<Mat> hsv_channels;
-	split(img_hsv, hsv_channels);
-
-	return hsv_channels;
-
+	return img_hsv;
 }
 
 Mat myThresh(Mat img, double value){
 	Mat res = img.clone();
-	threshold(img, res, value, 255, THRESH_BINARY_INV);
+	threshold(img, res, value, 255, CV_THRESH_BINARY);
 	return res;
 }
 
 Mat extract(const Mat& img, Rect rc)
 {
 	Mat res(img, rc);
+	return res;
+}
+
+Mat gaussian(Mat &img, int size, double sigma){
+	Mat res = img.clone();
+	GaussianBlur(img, res, Size(size, size), sigma);
 	return res;
 }
 
@@ -58,6 +67,7 @@ int main (void) {
 	}
 	//imshow("exemple1", im);
 
+
 	//applique une reduction de taille d'un facteur 5
 	//ici modifier pour ne reduire qu'a l'affichage 
 	//comme demande dans l'enonce
@@ -65,20 +75,27 @@ int main (void) {
 	Size tailleReduite(im.cols/reduction, im.rows/reduction);
 	Mat imreduite = Mat(tailleReduite,CV_8UC3); //cree une image à 3 canaux de profondeur 8 bits chacuns
 	resize(im,imreduite,tailleReduite);
-	//imshow("image reduite", imreduite);
+	imshow("image reduite", imreduite);
 
 	//computeHistogram("histogramme", im);
 
-	vector<Mat> dec = HSVDecomposition(imreduite);
-	Mat thresh = myThresh(dec[2],200);
+	Mat temp = imreduite.clone();
 
-	imshow("S Component thresh", thresh);
+	temp = toHSV(temp);
 
+	vector<Mat> dec = split(temp);
+	
+	namedWindow("H", WINDOW_AUTOSIZE);
+	imshow("H", dec[0]);
+	namedWindow("S", WINDOW_AUTOSIZE);
+	imshow("S", dec[1]);
+	namedWindow("V", WINDOW_AUTOSIZE);
+	imshow("V", dec[2]);
+	
+	/*
 	vector<vector<cv::Point>> contours;
 
-	findContours(thresh, contours, RETR_TREE, CHAIN_APPROX_SIMPLE);
-
-	/*
+	findContours(thresh, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 	Mat drawing = Mat::zeros(imreduite.size(), CV_8UC3);
 	for (size_t i = 0; i< contours.size(); i++)
 	{
