@@ -1,4 +1,4 @@
-﻿La génération a démarré 07/12/2016 11:45:37.
+﻿La génération a démarré 07/12/2016 12:18:01.
      1>Projet "C:\Users\lgeffrau\Documents\Visual Studio 2013\Projects\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include" /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include\opencv" /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include\opencv2" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ProjetAnalyseImage4INFO.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt squelette_test_opencv.cpp
@@ -14,4 +14,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:01.54
+Temps écoulé 00:00:01.68

@@ -26,8 +26,8 @@ vector<Mat> split(Mat & img){
 	split(img, res);
 	return res;
 }
-	
-	
+
+
 Mat toHSV(const Mat& img)
 {
 	Mat img_hsv;
@@ -53,58 +53,65 @@ Mat gaussian(Mat &img, int size, double sigma){
 	return res;
 }
 
+Mat gray(Mat &img){
+	Mat res;
+	cv::cvtColor(img, res, CV_BGR2GRAY);
+	return res;
+}
 
-int main (void) {
+Mat small(Mat &img, int reduction){
+
+	Size tailleReduite(img.cols / reduction, img.rows / reduction);
+	Mat imreduite = Mat(tailleReduite, CV_8UC3); //cree une image à 3 canaux de profondeur 8 bits chacuns
+	resize(img, imreduite, tailleReduite);
+	return imreduite;
+
+}
+
+int main(void) {
 
 	//charge et affiche l'image 
 	string imName = "..\\00000.png";
 	Mat im = imread(imName);
-	if(im.data == nullptr){
-		cerr << "Image not found: "<< imName << endl;
+	if (im.data == nullptr){
+		cerr << "Image not found: " << imName << endl;
 		waitKey(0);
 		//system("pause");
 		exit(EXIT_FAILURE);
 	}
-	//imshow("exemple1", im);
 
-
-	//applique une reduction de taille d'un facteur 5
-	//ici modifier pour ne reduire qu'a l'affichage 
-	//comme demande dans l'enonce
-	int reduction = 5;
-	Size tailleReduite(im.cols/reduction, im.rows/reduction);
-	Mat imreduite = Mat(tailleReduite,CV_8UC3); //cree une image à 3 canaux de profondeur 8 bits chacuns
-	resize(im,imreduite,tailleReduite);
-	imshow("image reduite", imreduite);
-
-	//computeHistogram("histogramme", im);
-
-	Mat temp = imreduite.clone();
-
-	temp = toHSV(temp);
-
-	vector<Mat> dec = split(temp);
-	
-	namedWindow("H", WINDOW_AUTOSIZE);
-	imshow("H", dec[0]);
-	namedWindow("S", WINDOW_AUTOSIZE);
-	imshow("S", dec[1]);
-	namedWindow("V", WINDOW_AUTOSIZE);
-	imshow("V", dec[2]);
-	
 	/*
-	vector<vector<cv::Point>> contours;
+	Mat temp = gray(im);
 
-	findContours(thresh, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
-	Mat drawing = Mat::zeros(imreduite.size(), CV_8UC3);
+
+	unsigned char ker[] = { 0, 0, 0, 1, 0, 0, 0,
+							0, 1, 1, 1, 1, 1, 0,
+							0, 1, 1, 1, 1, 1, 0,
+							1, 1, 1, 1, 1, 1, 1,
+							0, 1, 1, 1, 1, 1, 0,
+							0, 1, 1, 1, 1, 1, 0,
+							0, 0, 0, 1, 0, 0, 0, };
+	Mat kernel = Mat(7, 7, CV_8U, (void*)ker);
+
+	morphologyEx(temp, temp, MORPH_OPEN, kernel);
+	temp = myThresh(temp, 250);
+
+	imshow("binary", small(temp, 5));
+
+	*/
+	vector<vector<cv::Point>> contours;
+	
+
+	findContours(im, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+	Mat drawing = Mat::zeros(im.size(), CV_8UC3);
 	for (size_t i = 0; i< contours.size(); i++)
 	{
-		Scalar color = Scalar(rand() % 255, rand() % 255, rand() % 255);
-		cv::drawContours(drawing, contours, (int)i, color);
+	Scalar color = Scalar(rand() % 255, rand() % 255, rand() % 255);
+	cv::drawContours(drawing, contours, (int)i, color);
 	}
 	namedWindow("Contours", WINDOW_AUTOSIZE);
-	imshow("Contours", drawing);*/
-
+	imshow("Contours", drawing);
+	
 	//termine le programme lorsqu'une touche est frappee
 	waitKey(0);
 	//system("pause");
