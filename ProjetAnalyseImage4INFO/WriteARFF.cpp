@@ -10,7 +10,7 @@ void writeARFFFile(vector<Icone> icons)
 
 {
 
-	string fileName = "Features.ARFF";
+	string fileName = "Features.arff";
 
 	ofstream file(fileName, ios::out | ios::trunc);  // ouverture en écriture avec effacement du fichier ouvert
 
@@ -20,7 +20,7 @@ void writeARFFFile(vector<Icone> icons)
 
 	{
 
-		file << "@RELATION IconsFeatures" << endl;
+		file << "@RELATION IconsFeatures \n" << endl;
 
 
 
@@ -28,7 +28,7 @@ void writeARFFFile(vector<Icone> icons)
 
 		file << "@ATTRIBUTE iconHeight NUMERIC" << endl;
 
-		file << "@ATTRIBUTE iconHeight NOMINAL" << endl;
+		file << "@ATTRIBUTE iconSize {small,medium,large}\n" << endl;
 
 		file << "@DATA" << endl;
 
