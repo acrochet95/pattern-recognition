@@ -34,7 +34,7 @@ void writeARFFFile(vector<Icone> icons)
 
 		for each (Icone icon in icons)
 		{
-			file << icon.iconWidth << "," << icon.iconHeight << "," << icon.iconSize  << endl;
+			file << icon.getIconWidth() << "," << icon.getIconHeight() << "," << icon.getIconSize()  << endl;
 		}
 
 		file.close();

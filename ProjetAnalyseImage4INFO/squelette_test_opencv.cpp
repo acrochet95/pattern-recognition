@@ -19,6 +19,8 @@ using namespace cv;
 #include <random>
 using namespace std;
 
+#include "Icone.h"
+#include "WriteARFF.h"
 
 vector<Mat> split(Mat & img){
 	vector<Mat> res;
@@ -69,7 +71,7 @@ Mat small(Mat &img, int reduction){
 }
 
 int main(void) {
-
+	/*
 	//charge et affiche l'image 
 	string imName = "..\\00000.png";
 	Mat im = imread(imName);
@@ -101,7 +103,7 @@ int main(void) {
 	*/
 	vector<vector<cv::Point>> contours;
 	
-
+	/*
 	findContours(im, contours, CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
 	Mat drawing = Mat::zeros(im.size(), CV_8UC3);
 	for (size_t i = 0; i< contours.size(); i++)
@@ -111,7 +113,17 @@ int main(void) {
 	}
 	namedWindow("Contours", WINDOW_AUTOSIZE);
 	imshow("Contours", drawing);
-	
+	*/
+
+	vector<Icone> icons;
+	Icone icone1(2.0, 3.0, 5.0);
+	Icone icone2(5.0, 7.0, 10.0);
+	Icone icone3(12.0, 2.5, 5.6);
+	icons.push_back(icone1);
+	icons.push_back(icone2);
+	icons.push_back(icone3);
+	writeARFFFile(icons);
+
 	//termine le programme lorsqu'une touche est frappee
 	waitKey(0);
 	//system("pause");
