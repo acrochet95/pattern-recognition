@@ -114,7 +114,9 @@ int main(void) {
 	namedWindow("Contours", WINDOW_AUTOSIZE);
 	imshow("Contours", drawing);
 	*/
+	
 
+	//Test génération ARFF
 	vector<Icone> icons;
 	Icone icone1(2.0, 3.0, 5.0);
 	Icone icone2(5.0, 7.0, 10.0);
