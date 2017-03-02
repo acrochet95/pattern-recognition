@@ -6,5 +6,5 @@ The goal of this project is to extract images from drawings and to recognize the
 
 -----------------------------------------------------------------------------------------------
 
-CROCHET Antoine
+CROCHET Antoine  
 GEFFRAULT Luc
