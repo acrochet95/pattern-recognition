@@ -1,19 +1,33 @@
-﻿La génération a démarré 07/12/2016 09:02:35.
-     1>Projet "H:\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" sur le nœud 2 (Build cible(s)).
+﻿La génération a démarré 02/03/2017 09:40:57.
+     1>Projet "C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include" /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include\opencv" /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include\opencv2" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\ProjetAnalyseImage4INFO.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\opencv\build\include" /I"C:\Program Files (x86)\opencv\build\include\opencv" /I"C:\Program Files (x86)\opencv\build\include\opencv2" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\ProjetAnalyseImage4INFO.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
          stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include" /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include\opencv" /I"C:\Program Files (x86)\OpenCV-2.4.11.0\build\include\opencv2" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ProjetAnalyseImage4INFO.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt histogram.cpp squelette_test_opencv.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\opencv\build\include" /I"C:\Program Files (x86)\opencv\build\include\opencv" /I"C:\Program Files (x86)\opencv\build\include\opencv2" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\ProjetAnalyseImage4INFO.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt File.cpp histogram.cpp Icone.cpp squelette_test_opencv.cpp TextRecognition.cpp WriteARFF.cpp
+         WriteARFF.cpp
+         TextRecognition.cpp
+     1>c:\users\antoine\documents\insa\4info\analyse_image\projet_analyse_image_4info\projetanalyseimage4info\textrecognition.cpp(33): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+     1>c:\users\antoine\documents\insa\4info\analyse_image\projet_analyse_image_4info\projetanalyseimage4info\textrecognition.cpp(96): warning C4018: '<' : incompatibilité signed/unsigned
+     1>c:\users\antoine\documents\insa\4info\analyse_image\projet_analyse_image_4info\projetanalyseimage4info\textrecognition.cpp(166): warning C4018: '<' : incompatibilité signed/unsigned
+     1>c:\users\antoine\documents\insa\4info\analyse_image\projet_analyse_image_4info\projetanalyseimage4info\textrecognition.cpp(187): warning C4018: '<' : incompatibilité signed/unsigned
          squelette_test_opencv.cpp
+     1>c:\users\antoine\documents\insa\4info\analyse_image\projet_analyse_image_4info\projetanalyseimage4info\squelette_test_opencv.cpp(183): warning C4018: '<' : incompatibilité signed/unsigned
+     1>c:\users\antoine\documents\insa\4info\analyse_image\projet_analyse_image_4info\projetanalyseimage4info\squelette_test_opencv.cpp(194): warning C4018: '<' : incompatibilité signed/unsigned
+         Icone.cpp
          histogram.cpp
+         File.cpp
          Génération de code en cours...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\Debug\ProjetAnalyseImage4INFO.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\OpenCV-2.4.11.0\build\x86\vc12\lib" opencv_core2411d.lib opencv_highgui2411d.lib opencv_imgproc2411d.lib opencv_calib3d2411d.lib opencv_features2d2411d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\Debug\ProjetAnalyseImage4INFO.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\Debug\ProjetAnalyseImage4INFO.lib" /MACHINE:X86 Debug\histogram.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\Debug\ProjetAnalyseImage4INFO.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\opencv\build\x86\vc12\lib" opencv_core2411d.lib opencv_highgui2411d.lib opencv_imgproc2411d.lib opencv_calib3d2411d.lib opencv_features2d2411d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\Debug\ProjetAnalyseImage4INFO.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\Debug\ProjetAnalyseImage4INFO.lib" /MACHINE:X86 Debug\File.obj
+         Debug\histogram.obj
+         Debug\Icone.obj
          Debug\squelette_test_opencv.obj
          Debug\stdafx.obj
-         ProjetAnalyseImage4INFO.vcxproj -> H:\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\Debug\ProjetAnalyseImage4INFO.exe
-     1>Génération du projet "H:\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" terminée (Build cible(s)).
+         Debug\TextRecognition.obj
+         Debug\WriteARFF.obj
+     1>LINK : fatal error LNK1104: impossible d'ouvrir le fichier 'opencv_core2411d.lib'
+     1>Génération du projet "C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
 
-La génération a réussi.
+ÉCHEC de la build.
 
-Temps écoulé 00:00:08.86
+Temps écoulé 00:00:04.79

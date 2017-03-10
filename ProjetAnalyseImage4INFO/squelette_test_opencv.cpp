@@ -156,13 +156,14 @@ int main(void) {
 
 	TextRecognition tr;
 	int n = 0;
-	for (int j = 1; j < 34; j++)
+	//for (int j = 1; j < 34; j++)
+	for (int j = 1; j < 2; j++)
 	{
 		stringstream folder;
 		folder << setw(3) << setfill('0') << j;
 		string f = folder.str();
 
-		for (int i = 2; i < 22; i++)
+		for (int i = 2; i < 3; i++)// 22; i++)
 		{
 			stringstream ss;
 			ss << setw(2) << setfill('0') << i;

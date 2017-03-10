@@ -18,6 +18,8 @@
 
 #include "highgui.h"
 
+#include "Icone.h"
+
 using namespace cv;
 
 
@@ -37,6 +39,7 @@ class TextRecognition
 		double matchingTemplate(cv::Mat &img, cv::Mat &templ);
 
 		void caract(cv::Mat &img);
+		cv::Point getCentroid(cv::Mat img);
 
 	private:
 		std::map<string, Mat> icons;

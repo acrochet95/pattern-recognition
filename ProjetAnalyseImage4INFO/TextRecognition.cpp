@@ -380,11 +380,70 @@ double TextRecognition::matchingTemplate(cv::Mat &img, cv::Mat &templ)
 
 void TextRecognition::caract(cv::Mat &img)
 {
-	Mat binary;
-	//threshold(img, binary, 120, 255, THRESH_BINARY);
+	Icone icone;
+
+	Mat binary, canny_img;
 	cvtColor(img, binary, CV_BGR2GRAY);
+	threshold(binary, binary, 240, 255, CV_THRESH_BINARY);
 	int TotalNumberOfPixels = binary.rows * binary.cols;
 	int ZeroPixels = TotalNumberOfPixels - countNonZero(binary);
 
-	std::cout << ZeroPixels << " px black sur " << TotalNumberOfPixels << " px" << std::endl;
+	//imshow("img" + rand() % 100, binary);
+
+	//std::cout << ZeroPixels << " px black sur " << TotalNumberOfPixels << " px" << std::endl;
+
+	const float boites_englobantes_largeur = 2;
+	const float boites_englobantes_hauteur = 2;
+
+	const float boite_largeur = (float)img.size().width / boites_englobantes_largeur;
+	const float boite_hauteur = (float)img.size().height / boites_englobantes_hauteur;
+	
+
+
+	vector<pair<int, int> > gravity_centers;
+
+
+	//cvtColor(img, binary, CV_BGR2GRAY);
+	cv::Canny(binary, canny_img, 80, 240, 3);
+	cv::Point gc_img = getCentroid(canny_img);
+	cout << gc_img.x << " et " << gc_img.y << endl;
+	circle(img, gc_img, 3, Scalar(255, 0, 0), CV_FILLED);
+	//imshow("img" + rand() % 100, img);
+
+	gravity_centers.push_back(make_pair(gc_img.x, gc_img.y));
+
+	for (int i = 0; i < boites_englobantes_largeur; i++)
+	{
+		for (int j = 0; j < boites_englobantes_hauteur; j++)
+		{
+			//cout << i << " / " << j << endl;
+			cv::Rect rect(i*boite_largeur, j*boite_hauteur, boite_largeur, boite_hauteur);
+			cv::Mat croppedFaceImage(canny_img, rect);
+			//imshow("img" + rand() % 100, croppedFaceImage);
+			//images[i](rects[a]).copyTo(croppedFaceImage);
+			
+			//cv::Canny(croppedFaceImage, croppedFaceImage, 80, 240, 3);
+			cv::Point gc = getCentroid(croppedFaceImage);
+			circle(croppedFaceImage, gc, 3, Scalar(255, 255, 255), CV_FILLED);
+			imshow("img" + rand() % 100, croppedFaceImage);
+
+			gravity_centers.push_back(make_pair(gc.x, gc.y));
+		}
+	}
+
+
 }
+
+
+cv::Point TextRecognition::getCentroid(cv::Mat img)
+{
+	cv::Point Coord;
+	cv::Moments mm = cv::moments(img, false);
+	double moment10 = mm.m10;
+	double moment01 = mm.m01;
+	double moment00 = mm.m00;
+	Coord.x = int(moment10 / moment00);
+	Coord.y = int(moment01 / moment00);
+	return Coord;
+}
+
