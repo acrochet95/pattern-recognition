@@ -7,20 +7,23 @@ using namespace std;
 class Icone
 {
 	public:
-		Icone();
-		Icone(float iconH, float iconW, float size);
+		Icone(string type, string size);
 		~Icone();
 		void setGravityCenters(vector<pair<int, int> > &gc);
 		void setBlackPixels(float bp);
-		float getIconWidth();
-		float getIconHeight();
-		float getIconSize();
+		void setRatio(float r);
+
+		string getType();
+		string getIconSize();
+		vector<pair<int, int> > getGravityCenters();
+		float getBlackPixels();
+		float getRatio();
 
 	private:
-		float iconWidth;
-		float iconHeight;
-		float iconSize;
+		string type;
+		string iconSize;
 		vector<pair<int, int> > gravity_centers;
 		float black_pixels;
+		float ratio;
 };
 

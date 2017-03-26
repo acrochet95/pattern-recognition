@@ -20,8 +20,10 @@
 
 #include "histogram.h"
 
-#include "TextRecognition.h"
+#include "ImageExtraction.h"
+#include "FeaturesExtraction.h"
 
+#include "WriteARFF.h"
 
 
 #include "cv.h"
@@ -50,7 +52,7 @@ using namespace std;
 
 vector<Mat> split(Mat & img){
 
-	vector<Mat> res;
+	vector<cv::Mat> res;
 
 
 
@@ -64,11 +66,11 @@ vector<Mat> split(Mat & img){
 
 
 
-Mat toHSV(const Mat& img)
+cv::Mat toHSV(const cv::Mat& img)
 
 {
 
-	Mat img_hsv;
+	cv::Mat img_hsv;
 
 	cvtColor(img, img_hsv, CV_BGR2HSV);
 
@@ -78,9 +80,9 @@ Mat toHSV(const Mat& img)
 
 
 
-Mat myThresh(Mat img, double value){
+cv::Mat myThresh(cv::Mat img, double value){
 
-	Mat res = img.clone();
+	cv::Mat res = img.clone();
 
 	threshold(img, res, value, 255, CV_THRESH_BINARY);
 
@@ -90,11 +92,11 @@ Mat myThresh(Mat img, double value){
 
 
 
-Mat extract(const Mat& img, Rect rc)
+cv::Mat extract(const cv::Mat& img, Rect rc)
 
 {
 
-	Mat res(img, rc);
+	cv::Mat res(img, rc);
 
 	return res;
 
@@ -102,9 +104,9 @@ Mat extract(const Mat& img, Rect rc)
 
 
 
-Mat gaussian(Mat &img, int size, double sigma){
+cv::Mat gaussian(cv::Mat &img, int size, double sigma){
 
-	Mat res = img.clone();
+	cv::Mat res = img.clone();
 
 	GaussianBlur(img, res, Size(size, size), sigma);
 
@@ -114,9 +116,9 @@ Mat gaussian(Mat &img, int size, double sigma){
 
 
 
-Mat gray(Mat &img){
+cv::Mat gray(cv::Mat &img){
 
-	Mat res;
+	cv::Mat res;
 
 	cv::cvtColor(img, res, CV_BGR2GRAY);
 
@@ -125,14 +127,14 @@ Mat gray(Mat &img){
 }
 
 
-
-Mat small(Mat &img, int reduction){
+/*
+cv::Mat small(cv::Mat &img, int reduction){
 
 
 
 	Size tailleReduite(img.cols / reduction, img.rows / reduction);
 
-	Mat imreduite = Mat(tailleReduite, CV_8UC3); //cree une image à 3 canaux de profondeur 8 bits chacuns
+	cv::Mat imreduite = cv::Mat(tailleReduite, CV_8UC3); //cree une image à 3 canaux de profondeur 8 bits chacuns
 
 	resize(img, imreduite, tailleReduite);
 
@@ -140,12 +142,11 @@ Mat small(Mat &img, int reduction){
 
 
 
-}
+}*/
 
-
-
-int main(void) {
-
+void extractImages()
+{
+	vector<Icone> icons;
 
 
 	//charge et affiche l'image 
@@ -154,17 +155,20 @@ int main(void) {
 	std::clock_t start;
 	start = std::clock();
 
-	TextRecognition tr;
+	ImageExtraction tr;
 	int n = 0;
 	//for (int j = 1; j < 34; j++)
-	for (int j = 1; j < 2; j++)
+	for (int j = 11; j < 34; j++)
 	{
+		cout << "######################## " << j << endl;
 		stringstream folder;
 		folder << setw(3) << setfill('0') << j;
 		string f = folder.str();
 
-		for (int i = 2; i < 3; i++)// 22; i++)
+		for (int i = 2; i < 22; i++)
+			//for (int i = 20; i < 21; i++)
 		{
+			cout << "# " << i << endl;
 			stringstream ss;
 			ss << setw(2) << setfill('0') << i;
 			string s = ss.str();
@@ -184,7 +188,7 @@ int main(void) {
 			for (int i = 0; i < images.size(); i++)
 			{
 
-				vector<Rect> rects = tr.extractionImages(images[i]);
+				vector<Mat> rects = tr.extractionImages(images[i]);
 				n += rects.size();
 
 
@@ -194,23 +198,31 @@ int main(void) {
 
 				for (int a = 0; a < rects.size(); a++)
 				{
-					cv::Mat croppedFaceImage(images[i], rects[a]);
-					images[i](rects[a]).copyTo(croppedFaceImage);
+					//Icone icone(0, 0, size);
+					//cout << rects[a].size().width << endl;
+
+					//imshow("img" + rand() % 100, rects[a]);
+					cv::Mat croppedFaceImage;// (rects[i]);//images[i], rects[a]);
+					rects[a].copyTo(croppedFaceImage);
+
 
 					int id = i * 5 + a;
 					imwrite("images/" + f + "_" + s + "_" + to_string(id) + "image.jpg", croppedFaceImage);
+					writeFile(icon, f, s, i, a + 1, size);
 
-					tr.caract(croppedFaceImage);
-
-					//cout << "images/" + f + "_" + s + "_" + to_string(id) + "image.jpg" << endl;
+					//tr.caract(croppedFaceImage, icone);
 
 
+					//icons.push_back(icone);
 				}
-				cout << icon << " " << size << endl;
-				writeFile(icon, f, s, 7 - i / 5, i % 5 + 1, size);
+				//cout << icon << " " << size << endl;
+
+				//icone.setBlackPixels()
 			}
 		}
 	}
+
+	//writeARFFFile(icons);
 
 	int nb_img_theo = 34 * 20 * 35;
 
@@ -222,12 +234,22 @@ int main(void) {
 	cout << "total: " << n << " / " << nb_img_theo << endl;
 	cout << "ratio: " << (double)n / (double)nb_img_theo << endl;
 
-
 	//termine le programme lorsqu'une touche est frappee
 	waitKey(0);
+}
 
+void extractFeatures()
+{
+	FeaturesExtraction fe;
+	fe.start();
+}
+
+
+int main(void) {
+
+	//extractImages();
+	extractFeatures();
 
 	return EXIT_SUCCESS;
-
 }
 

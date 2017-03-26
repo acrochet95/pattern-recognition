@@ -1,14 +1,9 @@
 #include "stdafx.h"
 #include "Icone.h"
 
-Icone::Icone()
+Icone::Icone(string type, string s)
 {
-}
-
-Icone::Icone(float iconW, float iconH, float s)
-{
-	iconWidth = iconW;
-	iconHeight = iconH;
+	this->type = type;
 	iconSize = s;
 }
 
@@ -26,18 +21,31 @@ void Icone::setBlackPixels(float bp)
 	black_pixels = bp;
 }
 
-float Icone::getIconWidth()
+void Icone::setRatio(float r)
 {
-	return iconWidth;
+	ratio = r;
 }
 
-float Icone::getIconHeight()
+string Icone::getType()
 {
-	return iconHeight;
+	return type;
 }
 
-float Icone::getIconSize()
+string Icone::getIconSize()
 {
 	return iconSize;
 }
 
+vector< pair<int, int > > Icone::getGravityCenters()
+{
+	return gravity_centers;
+}
+
+float Icone::getBlackPixels()
+{
+	return black_pixels;
+}
+float Icone::getRatio()
+{
+	return ratio;
+}

@@ -1,8 +1,0 @@
-#PROJET 4INFO ANALYSE IMAGE - GROUPE : Geffrault Luc, Crochet Antoine, Harabari Victor
-label police
-form 00102
-scripter 001
-page 02
-row 6
-column 1
-size medium
