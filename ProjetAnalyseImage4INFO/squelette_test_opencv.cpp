@@ -158,17 +158,18 @@ void extractImages()
 	ImageExtraction tr;
 	int n = 0;
 	//for (int j = 1; j < 34; j++)
-	for (int j = 11; j < 34; j++)
+	//Stoppé à dossier 29, Feuille 9
+	for (int j = 2; j <= 34; j++)
 	{
-		cout << "######################## " << j << endl;
+		cout << "######################## Dossier n°" << j << endl;
 		stringstream folder;
 		folder << setw(3) << setfill('0') << j;
 		string f = folder.str();
 
-		for (int i = 2; i < 22; i++)
+		for (int i = 2; i <= 22; i++)
 			//for (int i = 20; i < 21; i++)
 		{
-			cout << "# " << i << endl;
+			cout << "# Scan n° " << i << endl;
 			stringstream ss;
 			ss << setw(2) << setfill('0') << i;
 			string s = ss.str();
@@ -183,12 +184,15 @@ void extractImages()
 				exit(EXIT_FAILURE);
 			}
 
-			vector<Mat> images = tr.prepareImage(im);
+			vector<Mat> images = tr.prepareImage(im); // Divise l'image en 7 pour obtenir les 7 lignes de dessins
 
 			for (int i = 0; i < images.size(); i++)
 			{
 
-				vector<Mat> rects = tr.extractionImages(images[i]);
+				vector<Mat> rects = tr.extractionImages(images[i]); // Extrait chaque dessin et le sauvegarde dans rects
+				/*if (rects.size() < 5) { // Afficher les infos sur le dessin qui n'a pas été extrait 
+
+				}*/
 				n += rects.size();
 
 

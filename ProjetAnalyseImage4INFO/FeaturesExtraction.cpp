@@ -150,18 +150,52 @@ void FeaturesExtraction::start()
 
 void FeaturesExtraction::caract(cv::Mat &img, Icone &icone)
 {
-	Mat binary, canny_img;
+	Mat binary, canny_img, corners, cornersNorm, cornersNormScaled;
 	cvtColor(img, binary, CV_BGR2GRAY);
+
+	corners = Mat::zeros(img.size(), CV_32FC1);
+
+	// Counting edges with Harris corner detection :
+	cornerHarris(binary, corners, 2, 3, 0.04, BORDER_DEFAULT);
+
+	normalize(corners, cornersNorm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+	convertScaleAbs(cornersNorm, cornersNormScaled);
+
+	int nbCorners = 0;
+
+	for (int j = 0; j < cornersNorm.rows; j++)
+	{
+		for (int i = 0; i < cornersNorm.cols; i++)
+		{
+			if ((int)cornersNorm.at<float>(j, i) > 200)
+			{
+				nbCorners++;
+			}
+		}
+	}
+	cout << "Corner à la remoise : " << nbCorners << endl;
+	icone.setNbCorners(nbCorners);
+
 	threshold(binary, binary, 250, 255, THRESH_BINARY_INV);
 	int TotalNumberOfPixels = binary.rows * binary.cols;
 	int ZeroPixels = TotalNumberOfPixels - countNonZero(binary);
 
+	// ratio pixels noir/ nb total pixel
 	icone.setBlackPixels((float)ZeroPixels / (float)(img.cols * img.rows));
 
 
-	//std::cout << ZeroPixels << " px black sur " << TotalNumberOfPixels << " px" << std::endl;
 
+	//std::cout << ZeroPixels << " px black sur " << TotalNumberOfPixels << " px" << std::endl;
+	vector<float> rBPx;
 	vector<pair<int, int> > gc;
+
+	vector<float> listBPx = zoningBlackPixels(2, binary);
+	rBPx.insert(rBPx.end(), listBPx.begin(), listBPx.end());
+
+	vector<float> listBPx2 = zoningBlackPixels(3, binary);
+	rBPx.insert(rBPx.end(), listBPx2.begin(), listBPx2.end());
+
+	icone.setRatiosBPx(rBPx);
 
 	cv::Canny(binary, canny_img, 80, 240, 3);
 
@@ -195,6 +229,8 @@ void FeaturesExtraction::caract(cv::Mat &img, Icone &icone)
 	icone.setGravityCenters(gc);
 }
 
+
+// return the ratio width/height of an icon
 float FeaturesExtraction::getRatio(Mat& img)
 {
 
@@ -225,15 +261,47 @@ float FeaturesExtraction::getRatio(Mat& img)
 	return (x2 - x) / (y2 - y);
 }
 
+vector<float> FeaturesExtraction::zoningBlackPixels(int size, Mat &binary_img)
+{
+	const float boites_englobantes_largeur = size;
+	const float boites_englobantes_hauteur = size;
+
+	const float boite_largeur = (float)binary_img.size().width / boites_englobantes_largeur;
+	const float boite_hauteur = (float)binary_img.size().height / boites_englobantes_hauteur;
+
+	vector<float > ratios_BPx;
+
+	for (int i = 0; i < boites_englobantes_largeur; i++)
+	{
+		for (int j = 0; j < boites_englobantes_hauteur; j++)
+		{
+
+			//cout << i << " / " << j << endl;
+			cv::Rect rect(i*boite_largeur, j*boite_hauteur, boite_largeur, boite_hauteur);
+			cv::Mat croppedFaceImage(binary_img, rect);
+
+			int TotalNumberOfPixels = croppedFaceImage.rows * croppedFaceImage.cols;
+			int ZeroPixels = TotalNumberOfPixels - countNonZero(croppedFaceImage);
+
+			// ratio pixels noir/ nb total pixel
+			float ratio = ((float)ZeroPixels / (float)(croppedFaceImage.cols * croppedFaceImage.rows));
+
+			ratios_BPx.push_back(ratio);
+		}
+	}
+
+	return ratios_BPx;
+
+}
+
+// Compute the gravity centers and the ratio : black pixels/total nbPixels   for each zone of the zoning
 vector<pair<int, int> > FeaturesExtraction::zoning(int size, Mat &canny_img)
 {
-
 	const float boites_englobantes_largeur = size;
 	const float boites_englobantes_hauteur = size;
 
 	const float boite_largeur = (float)canny_img.size().width / boites_englobantes_largeur;
 	const float boite_hauteur = (float)canny_img.size().height / boites_englobantes_hauteur;
-
 
 
 	vector<pair<int, int> > gravity_centers;
@@ -252,6 +320,7 @@ vector<pair<int, int> > FeaturesExtraction::zoning(int size, Mat &canny_img)
 	{
 		for (int j = 0; j < boites_englobantes_hauteur; j++)
 		{
+
 			//cout << i << " / " << j << endl;
 			cv::Rect rect(i*boite_largeur, j*boite_hauteur, boite_largeur, boite_hauteur);
 			cv::Mat croppedFaceImage(canny_img, rect);
@@ -279,5 +348,12 @@ cv::Point FeaturesExtraction::getCentroid(cv::Mat img)
 	double moment00 = mm.m00;
 	Coord.x = int(moment10 / moment00);
 	Coord.y = int(moment01 / moment00);
+
+	//Enlever les valeurs erronées
+	if (Coord.x <= -2147483644 || Coord.y <= -2147483644)
+	{
+		Coord.x = 0;
+		Coord.y = 0;
+	}
 	return Coord;
 }

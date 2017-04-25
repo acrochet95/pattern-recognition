@@ -30,6 +30,7 @@ class FeaturesExtraction
 		void caract(cv::Mat &img, Icone &icone);
 		float getRatio(cv::Mat &img);
 		vector<pair<int, int> > zoning(int size, cv::Mat& canny_img);
+		vector<float> zoningBlackPixels(int size, cv::Mat& binary_img);
 		cv::Point getCentroid(cv::Mat img);
 
 	private :

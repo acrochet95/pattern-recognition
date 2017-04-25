@@ -38,6 +38,24 @@ void writeARFFFile(vector<Icone> icons)
 			}
 		}
 
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				file << "@ATTRIBUTE ratioBlackPixelsZoning1_" << i << j << " NUMERIC" << endl;
+			}
+		} 
+
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				file << "@ATTRIBUTE ratioBlackPixelsZoning2_" << i << j << " NUMERIC" << endl;
+			}
+		}
+
+		file << "@ATTRIBUTE nbCorners NUMERIC" << endl;
+
 		file << "@ATTRIBUTE blackPixels NUMERIC" << endl;
 
 		file << "@ATTRIBUTE ratio NUMERIC" << endl;
@@ -53,7 +71,17 @@ void writeARFFFile(vector<Icone> icons)
 			for (int i = 0; i < icon.getGravityCenters().size(); i++)
 			{
 				pair<int, int> pair = icon.getGravityCenters()[i];
-				file << "," << pair.first << "," << pair.second;
+
+				if (i != 0)
+					file << "," << pair.first << "," << pair.second;
+				else
+					file << pair.first << "," << pair.second;
+			}
+
+			for (int i = 0; i < icon.getRatiosBPx().size(); i++)
+			{
+				float ratioBPx = icon.getRatiosBPx()[i];
+				file << "," << ratioBPx;
 			}
 
 			file << "," << icon.getBlackPixels() << "," << icon.getRatio();

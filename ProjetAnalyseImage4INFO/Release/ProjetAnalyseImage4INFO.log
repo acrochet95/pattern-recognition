@@ -1,12 +1,21 @@
-﻿La génération a démarré 26/03/2017 17:15:34.
-     1>Projet "C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" sur le nœud 2 (Build cible(s)).
+﻿La génération a démarré 14/04/2017 19:14:20.
+     1>Projet "C:\Users\Luc\Source\Repos\pattern-recognition\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\opencv\build\include" /I"C:\Program Files (x86)\opencv\build\include\opencv" /I"C:\Program Files (x86)\opencv\build\include\opencv2" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ProjetAnalyseImage4INFO.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt squelette_test_opencv.cpp
-         squelette_test_opencv.cpp
-     1>squelette_test_opencv.cpp(188): warning C4018: '<' : incompatibilité signed/unsigned
-     1>squelette_test_opencv.cpp(199): warning C4018: '<' : incompatibilité signed/unsigned
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\opencv\build\include" /I"C:\Program Files (x86)\opencv\build\include\opencv" /I"C:\Program Files (x86)\opencv\build\include\opencv2" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _CRT_SECURE_NO_WARNINGS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\ProjetAnalyseImage4INFO.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt FeaturesExtraction.cpp
+         FeaturesExtraction.cpp
+     1>FeaturesExtraction.cpp(243): warning C4018: '<' : incompatibilité signed/unsigned
+     1>FeaturesExtraction.cpp(251): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+     1>FeaturesExtraction.cpp(253): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+     1>FeaturesExtraction.cpp(255): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+     1>FeaturesExtraction.cpp(257): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+     1>FeaturesExtraction.cpp(266): warning C4244: 'initialisation' : conversion de 'int' en 'const float', perte possible de données
+     1>FeaturesExtraction.cpp(267): warning C4244: 'initialisation' : conversion de 'int' en 'const float', perte possible de données
+     1>FeaturesExtraction.cpp(280): warning C4244: 'argument' : conversion de 'const float' en 'int', perte possible de données
+     1>FeaturesExtraction.cpp(300): warning C4244: 'initialisation' : conversion de 'int' en 'const float', perte possible de données
+     1>FeaturesExtraction.cpp(301): warning C4244: 'initialisation' : conversion de 'int' en 'const float', perte possible de données
+     1>FeaturesExtraction.cpp(325): warning C4244: 'argument' : conversion de 'const float' en 'int', perte possible de données
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\Release\ProjetAnalyseImage4INFO.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files (x86)\opencv\build\x86\vc12\lib" opencv_core2413.lib opencv_highgui2413.lib opencv_imgproc2413.lib opencv_calib3d2413.lib opencv_features2d2413.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\Release\ProjetAnalyseImage4INFO.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\Release\ProjetAnalyseImage4INFO.lib" /MACHINE:X86 /SAFESEH Release\FeaturesExtraction.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Luc\Source\Repos\pattern-recognition\Release\ProjetAnalyseImage4INFO.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files (x86)\opencv\build\x86\vc12\lib" /LIBPATH:C:\Users\Luc\Downloads\opencv\build\x64\vc14\lib opencv_calib3d2413.lib opencv_contrib2413.lib opencv_core2413.lib opencv_features2d2413.lib opencv_flann2413.lib opencv_gpu2413.lib opencv_highgui2413.lib opencv_imgproc2413.lib opencv_legacy2413.lib opencv_ml2413.lib opencv_nonfree2413.lib opencv_objdetect2413.lib opencv_photo2413.lib opencv_stitching2413.lib opencv_ts2413.lib opencv_video2413.lib opencv_videostab2413.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Luc\Source\Repos\pattern-recognition\Release\ProjetAnalyseImage4INFO.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Luc\Source\Repos\pattern-recognition\Release\ProjetAnalyseImage4INFO.lib" /MACHINE:X86 /SAFESEH Release\FeaturesExtraction.obj
          Release\File.obj
          Release\histogram.obj
          Release\Icone.obj
@@ -16,9 +25,9 @@
          Release\WriteARFF.obj
          Génération de code en cours
          Fin de la génération du code
-         ProjetAnalyseImage4INFO.vcxproj -> C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\Release\ProjetAnalyseImage4INFO.exe
-     1>Génération du projet "C:\Users\Antoine\Documents\INSA\4INFO\Analyse_Image\Projet_Analyse_Image_4INFO\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" terminée (Build cible(s)).
+         ProjetAnalyseImage4INFO.vcxproj -> C:\Users\Luc\Source\Repos\pattern-recognition\Release\ProjetAnalyseImage4INFO.exe
+     1>Génération du projet "C:\Users\Luc\Source\Repos\pattern-recognition\ProjetAnalyseImage4INFO\ProjetAnalyseImage4INFO.vcxproj" terminée (Build cible(s)).
 
 La génération a réussi.
 
-Temps écoulé 00:00:03.11
+Temps écoulé 00:00:06.07
